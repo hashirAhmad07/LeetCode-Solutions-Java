@@ -1,0 +1,67 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+        
+        int pivot = findPivot(nums);
+
+////if pivot didn't found its mean array is not rotated
+        if(pivot == -1){
+            return binarySearch(nums, target, start, end);
+        }
+
+        //if pivot is found, then you have 2 asc sorted array
+        if(nums[pivot] == target){
+            return pivot;
+        }
+        
+        if(target >= nums[0]){
+            return binarySearch(nums, target, start, pivot-1);
+        }
+
+        return binarySearch(nums, target, pivot+1, end);
+    }
+
+    public int binarySearch(int[] nums,int target,int start,int end){
+        
+        while(start <= end){
+            
+            int mid = start + (end - start)/2;
+            
+            if(target < nums[mid]){
+                end = mid - 1;
+            }
+            else if(target > nums[mid]){
+                start = mid + 1;
+            }
+            else{
+               return mid;
+            }
+        }
+        return -1;
+    }
+
+    public int findPivot(int[] arr){
+        int start = 0;
+        int end = arr.length-1;
+
+        while(start <= end){
+            int mid = start + (end - start)/2;
+
+            //4 cases over here,
+            if(mid < end && arr[mid] > arr[mid+1]){
+                return mid;//as pivot
+            }
+            if(mid > start && arr[mid] < arr[mid-1]){
+                return mid-1;//as pivot
+            }
+            if(arr[mid] <= arr[start]){
+                end = mid-1;
+            }
+            else{
+                start = mid+1;
+            }
+        }
+        return -1;
+    }
+}
