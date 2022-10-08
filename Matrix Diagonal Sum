@@ -1,0 +1,29 @@
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        
+        //Storing sum of diagnols
+        int sum = 0;
+        //size of matrix 
+        int N = mat.length;
+        
+        for(int row = 0; row < N; row++)
+        {
+            for(int col = 0; col < N; col++)
+            {
+                if(row == col)
+                    sum += mat[row][col];
+                if(row + col == N -1){
+                    if(row != col)
+                    sum += mat[row][col];
+                   // 
+                      //  continue;
+                }
+                    
+                    
+            }
+        }
+        return sum;
+        
+        
+    }
+}
