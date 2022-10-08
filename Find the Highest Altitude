@@ -1,0 +1,30 @@
+class Solution {
+    public int largestAltitude(int[] gain) {
+        
+        //we are going to create new answer array with the size n+1;
+        int[] arr = new int[gain.length+1];
+        arr[0] = 0; //initializing index arr[0] with 0 bcaz at first altitude is zero
+        
+        //loop is used to iterate over the array to get maximum gain from ith to i+1 possition
+        for(int i=0;i<gain.length;i++)
+        {
+            arr[i+1] = gain[i] + arr[i];
+            //arr[i+1] storing net gain from ith to i+1 index 
+        }
+        //findind maximum from arr
+        int maximum = max(arr);
+        return maximum;
+        
+    }
+    
+    public int max(int[] arr)
+    {
+        int num = arr[0];
+        for(int i=0; i<arr.length;i++)
+        {
+            if(arr[i] > num)
+                num = arr[i];
+        }
+        return num;
+    }
+}
