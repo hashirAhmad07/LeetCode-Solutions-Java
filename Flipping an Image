@@ -1,0 +1,28 @@
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        
+        int n = image[0].length; //Taking length of the 2D-array
+        int[][]  result = new int[n][n]; //Making another 2D-array for storing result
+        
+        //LastIndex will store the index of col from last
+        int lastIndex = n - 1;  
+        
+        //As variable specify row iterate over row and col over col
+        for(int row = 0; row < image.length; row++)
+        {
+            for(int col = image.length-1; col>= 0 ; col--)
+            {
+                //Flip Horizzentally tha image
+                result[row][lastIndex-col] = image[row][col];
+                
+                //Inverting Image 
+                if(result[row][lastIndex-col]==0)
+                    result[row][lastIndex-col] = 1;
+                else 
+                    result[row][lastIndex-col] = 0;
+            }
+        }
+        //returning the resulting array
+        return result;
+    }
+}
